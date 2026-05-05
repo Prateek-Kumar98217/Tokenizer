@@ -13,8 +13,8 @@ def process_single_file(filepath: Path):
         content = f.read()
         tokens = re.findall(TOKEN_PATTERN, content)
         for token in tokens:
-            token_bytes = token.encode("utf-8")
-            local_counter.update(zip(token_bytes, token_bytes[1:]))
+            byte_tuple = tuple(token.encode("utf-8"))
+            local_counter[byte_tuple] += 1
     return local_counter
 
 def precompute_corpus(data_dir: str, num_workers: int = None):      
